@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equilíbrio Integral – Loja do Matheus Spilmann</title>
+    <meta
+      name="description"
+      content="Loja online de produtos e aulas de Pilates para bem-estar físico e saúde sexual. Inclusiva e acolhedora."
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primaria: #e91e63;
+        --secundaria: #9c27b0;
+        --accent: #2196f3;
+        --rainbow: linear-gradient(
+          90deg,
+          #ff0000,
+          #ff9900,
+          #ffff00,
+          #00ff00,
+          #0099ff,
+          #9900ff
+        );
+        --fundo: #f8f9fa;
+      }
+      body {
+        background: var(--fundo);
+        color: #333;
+        font-family: "Open Sans", sans-serif;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", serif;
+      }
+      .navbar {
+        background: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+          var(--rainbow),
+          url("https://i.etsystatic.com/41165592/r/il/1e6528/4723715150/il_fullxfull.4723715150_oqan.jpg")
+            center/cover;
+        color: white;
+        padding: 220px 0;
+        text-align: center;
+        background-blend-mode: overlay;
+      }
+      .hero h1 {
+        font-size: 4.5rem;
+        font-weight: 700;
+        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        margin-bottom: 20px;
+      }
+      .hero .lead {
+        font-size: 1.6rem;
+        font-weight: 400;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        max-width: 800px;
+        margin: 0 auto 40px;
+      }
+      .card-produto {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: 0.4s;
+      }
+      .card-produto:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 20px 50px rgba(233, 30, 99, 0.2);
+      }
+      .btn-comprar {
+        background: var(--rainbow);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 30px;
+        font-weight: 600;
+      }
+      .btn-comprar:hover {
+        opacity: 0.9;
+      }
+      .aviso-18 {
+        background: linear-gradient(45deg, #ff9800, #ff5722);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 30px 0;
+        text-align: center;
+      }
+      .sobre-dono {
+        background: white;
+        padding: 80px 0;
+      }
+      .carrinho {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 350px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 1000;
+      }
+      footer {
+        background: #212121;
+        color: #eee;
+        padding: 60px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a
+          class="navbar-brand fw-bold fs-3"
+          style="
+            background: var(--rainbow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          "
+          >Equilíbrio Integral</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li><a class="nav-link" href="#home">Início</a></li>
+            <li><a class="nav-link" href="#sobre">Sobre Matheus</a></li>
+            <li><a class="nav-link" href="#produtos">Loja</a></li>
+            <li><a class="nav-link" href="#pilates">Aulas de Pilates</a></li>
+            <li><a class="nav-link" href="#contato">Contato</a></li>
+          </ul>
+          <button
+            id="btnCarrinho"
+            class="btn btn-outline-dark ms-3 position-relative"
+          >
+            <i class="fas fa-shopping-cart"></i>
+            <span
+              id="qtdCarrinho"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >0</span
+            >
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home" class="hero">
+      <div class="container">
+        <h1>Bem-estar sem julgamentos</h1>
+        <p class="lead">
+          Produtos e aulas para saúde física e prazer consciente – espaço
+          inclusivo para homens gays
+        </p>
+        <button
+          class="btn btn-comprar btn-lg"
+          onclick="document.getElementById('produtos').scrollIntoView()"
+        >
+          Explorar a Loja
+        </button>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="aviso-18">
+        <strong>Atenção:</strong> Esta loja contém produtos para bem-estar
+        sexual adulto. Exclusivo para maiores de 18 anos.
+      </div>
+    </div>
+
+    <section id="sobre" class="sobre-dono">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5 text-center">
+            <img
+              src="./assets/img/foto_produto1.jpeg"
+              alt="Matheus Spilmann"
+              class="img-fluid rounded-circle shadow-lg"
+              style="max-width: 400px"
+            />
+          </div>
+          <div class="col-lg-7">
+            <h2>Olá, sou Matheus Spilmann</h2>
+            <p>
+              Instrutor de Pilates e especialista em bem-estar inclusivo. Criei
+              esta loja para oferecer produtos de qualidade que promovam saúde
+              física, prazer e autoestima em um ambiente acolhedor e sem
+              julgamentos.
+            </p>
+            <p>
+              Aqui você encontra itens selecionados com discrição e respeito à
+              diversidade.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Vibradores e Lubrificante (mantida igual) -->
+    <section id="produtos" class="container py-5">
+      <h2 class="text-center mb-5 display-5">Nossos Vibradores e Lubrificante</h2>
+      <div class="row g-4">
+        <!-- (seus 6 cards de vibradores aqui – mantive exatamente como você enviou) -->
+        <div class="col-md-4">
+          <div class="card-produto">
+            <img src="https://m.media-amazon.com/images/I/71EHbQ7lvdL._AC_UF1000,1000_QL80_.jpg" class="card-img-top" alt="Anel Vibratório Clássico" />
+            <div class="card-body text-center">
+              <h5>Anel Vibratório Clássico</h5>
+              <p>Vibrações intensas para ereção firme e orgasmo prolongado</p>
+              <h4>R$ 299,90</h4>
+              <button class="btn btn-comprar" onclick="adicionarAoCarrinho('Anel Vibratório Clássico', 299.90)">Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-produto">
+            <img src="https://m.media-amazon.com/images/I/513fjizlRML._AC_UF1000,1000_QL80_.jpg" class="card-img-top" alt="Anel Vibratório com Controle" />
+            <div class="card-body text-center">
+              <h5>Anel Vibratório com Controle Remoto</h5>
+              <p>28 modos potentes para prazer explosivo a distância</p>
+              <h4>R$ 349,90</h4>
+              <button class="btn btn-comprar" onclick="adicionarAoCarrinho('Anel Vibratório Remoto', 349.90)">Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-produto">
+            <img src="https://m.media-amazon.com/images/I/6161Dk+1g5L._AC_UF1000,1000_QL80_.jpg" class="card-img-top" alt="Massageador Próstata Básico" />
+            <div class="card-body text-center">
+              <h5>Massageador de Próstata Vibratório</h5>
+              <p>Estímulo profundo e ondas de prazer interno máximo</p>
+              <h4>R$ 399,90</h4>
+              <button class="btn btn-comprar" onclick="adicionarAoCarrinho('Massageador Próstata Básico', 399.90)">Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-produto">
+            <img src="https://m.media-amazon.com/images/I/61AdimEFwpL._AC_UF1000,1000_QL80_.jpg" class="card-img-top" alt="Massageador Próstata App" />
+            <div class="card-body text-center">
+              <h5>Massageador Próstata com App Bluetooth</h5>
+              <p>Controle personalizado para orgasmo prostático intenso</p>
+              <h4>R$ 499,90</h4>
+              <button class="btn btn-comprar" onclick="adicionarAoCarrinho('Massageador Próstata App', 499.90)">Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-produto">
+            <img src="https://m.media-amazon.com/images/I/51ADac+Op6L._AC_UF1000,1000_QL80_.jpg" class="card-img-top" alt="Vibrador Anal Potente" />
+            <div class="card-body text-center">
+              <h5>Vibrador Anal com App</h5>
+              <p>Penetração vibrante e controle remoto para prazer total</p>
+              <h4>R$ 379,90</h4>
+              <button class="btn btn-comprar" onclick="adicionarAoCarrinho('Vibrador Anal App', 379.90)">Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-produto">
+            <img src="https://m.media-amazon.com/images/I/61FdZzu81GL._AC_UF894,1000_QL80_.jpg" class="card-img-top" alt="Lubrificante Premium" />
+            <div class="card-body text-center">
+              <h5>Lubrificante Premium Silicone</h5>
+              <p>Deslize perfeito, longa duração e compatível com tudo</p>
+              <h4>R$ 129,90</h4>
+              <button class="btn btn-comprar" onclick="adicionarAoCarrinho('Lubrificante Premium', 129.90)">Adicionar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nova seção Aulas de Pilates – agora como produtos no carrinho -->
+    <section id="pilates" class="container py-5 bg-white">
+      <h2 class="text-center mb-5 display-5">Aulas de Pilates</h2>
+      <div class="row g-4">
+        <!-- Aula Iniciante -->
+        <div class="col-md-4">
+          <div class="card-produto h-100">
+            <img
+              src="https://villagepilates.com.au/wp-content/uploads/2025/03/Pilates-for-Men.png"
+              class="card-img-top"
+              alt="Pilates Iniciante"
+            />
+            <div class="card-body text-center">
+              <h5>Pilates Iniciante (Aula Avulsa)</h5>
+              <p>Ideal para quem está começando. Postura, respiração e consciência corporal.</p>
+              <h4>R$ 120,00</h4>
+              <button class="btn btn-comprar" onclick="adicionarAoCarrinho('Aula Pilates Iniciante', 120.00)">
+                Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aula Intermediário -->
+        <div class="col-md-4">
+          <div class="card-produto h-100">
+            <img
+              src="https://centeredworkout.com/wp-content/uploads/2024/12/Pilates-men.jpg"
+              class="card-img-top"
+              alt="Pilates Intermediário"
+            />
+            <div class="card-body text-center">
+              <h5>Pilates Intermediário (Aula Avulsa)</h5>
+              <p>Fortalecimento do core, equilíbrio e maior performance.</p>
+              <h4>R$ 150,00</h4>
+              <button class="btn btn-comprar" onclick="adicionarAoCarrinho('Aula Pilates Intermediário', 150.00)">
+                Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aula Avançado / Personal -->
+        <div class="col-md-4">
+          <div class="card-produto h-100">
+            <img
+              src="https://rtrpilates.com/wp-content/uploads/RTR-Pilates-Male-pilates-instructor-in-DC-900x600.jpg"
+              class="card-img-top"
+              alt="Pilates Avançado Personal"
+            />
+            <div class="card-body text-center">
+              <h5>Pilates Avançado / Personal (Aula Avulsa)</h5>
+              <p>Atendimento personalizado com foco em objetivos específicos.</p>
+              <h4>R$ 180,00</h4>
+              <button class="btn btn-comprar" onclick="adicionarAoCarrinho('Aula Pilates Avançado/Personal', 180.00)">
+                Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carrinho Flutuante -->
+    <div id="carrinho" class="carrinho p-4">
+      <h5>Seu Carrinho</h5>
+      <div id="itensCarrinho"></div>
+      <hr />
+      <div class="d-flex justify-content-between fw-bold">
+        <span>Total:</span>
+        <span id="totalCarrinho">R$ 0,00</span>
+      </div>
+      <button class="btn btn-comprar w-100 mt-3" onclick="finalizarCompra()">
+        Finalizar no WhatsApp
+      </button>
+    </div>
+
+    <section id="contato" class="container py-5 text-center">
+      <h2>Entre em Contato</h2>
+      <p class="fs-4">
+        <a 
+          href="https://api.whatsapp.com/send?phone=5549999097765"
+          target="_blank"
+          class="text-success text-decoration-none me-3"
+        >
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a 
+          href="https://www.instagram.com/matheus.spilmam/"
+          target="_blank"
+          class="text-decoration-none text-danger"
+        >
+          <i class="fab fa-instagram"></i> Instagram
+        </a>
+      </p>
+    </section>
+
+    <footer class="text-center">
+      <p>
+        © 2025 Equilíbrio Integral – Matheus Spilmann. Espaço inclusivo e
+        acolhedor.
+      </p>
+    </footer>
+
+    <script>
+      let carrinho = [];
+      let total = 0;
+
+      function adicionarAoCarrinho(nome, preco) {
+        carrinho.push({ nome, preco });
+        total += preco;
+        atualizarCarrinho();
+        document.getElementById("carrinho").style.display = "block";
+      }
+
+      function atualizarCarrinho() {
+        document.getElementById("qtdCarrinho").textContent = carrinho.length;
+        const itens = document.getElementById("itensCarrinho");
+        itens.innerHTML = carrinho
+          .map((item) => `<p>${item.nome} – R$ ${item.preco.toFixed(2)}</p>`)
+          .join("");
+        document.getElementById("totalCarrinho").textContent = `R$ ${total.toFixed(2)}`;
+      }
+
+      function finalizarCompra() {
+        if (carrinho.length === 0) return alert("Carrinho vazio!");
+        const msg =
+          carrinho.map((i) => `${i.nome} – R$ ${i.preco}`).join("%0A") +
+          `%0ATotal: R$ ${total.toFixed(2)}`;
+        window.open(
+          `https://wa.me/5549999097765?text=Olá Matheus! Quero comprar:%0A${msg}`,
+          "_blank"
+        );
+        carrinho = [];
+        total = 0;
+        atualizarCarrinho();
+        document.getElementById("carrinho").style.display = "none";
+      }
+
+      document.getElementById("btnCarrinho").onclick = () =>
+        (document.getElementById("carrinho").style.display = "block");
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
